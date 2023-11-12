@@ -1,27 +1,19 @@
-# TODO  Напишите функцию count_letters
 def count_letters(text):
     dict_of_letters = {}
     text_low = text.lower()
-    text_low = text_low.replace(' ', '')
-    text_low = text_low.replace('…', '')
-    text_low = text_low.replace('\n', '')
-    text_low = text_low.replace('!', '')
-    text_low = text_low.replace(':', '')
-    text_low = text_low.replace(';', '')
-    text_low = text_low.replace('—', '')
-    text_low = text_low.replace(',', '')
-    text_low = text_low.replace('.', '')
-    number_of_letters = len(text_low)
+    alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
     for i in text_low:
-        if i not in dict_of_letters:
-            dict_of_letters[i] = 1
-        else:
-            dict_of_letters[i] += 1
-    return dict_of_letters, number_of_letters
+        if i in alphabet:
+            if i not in dict_of_letters:
+               dict_of_letters[i] = 1
+            else:
+                dict_of_letters[i] += 1
+    return dict_of_letters
 
 
 # TODO Напишите функцию calculate_frequency
-def calculate_frequency(dict_of_letters, number):
+def calculate_frequency(text, dict_of_letters):
+    number = len(text.replace(' ', ''))
     dict_of_frequency = {}
     for i in dict_of_letters:
         dict_of_frequency[i] = round(dict_of_letters[i] / number, 2)
@@ -64,8 +56,7 @@ main_str = """
 """
 
 # TODO Распечатайте в столбик букву и её частоту в тексте
-dict_letters, number = count_letters(main_str)
-dict_frequency = calculate_frequency(dict_letters, number)
-#print(dict_frequency)
+dict_letters = count_letters(main_str)
+dict_frequency = calculate_frequency(main_str, dict_letters)
 for letter, frequency in dict_frequency.items():
     print(f'{letter}: {frequency:.2f}')
